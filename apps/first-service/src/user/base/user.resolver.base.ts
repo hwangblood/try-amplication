@@ -58,6 +58,7 @@ export class UserResolverBase {
     return result;
   }
 
+
   @Public()
   @graphql.Mutation(() => User)
   async createUser(@graphql.Args() args: CreateUserArgs): Promise<User> {
