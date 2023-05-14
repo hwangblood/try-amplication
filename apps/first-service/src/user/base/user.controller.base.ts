@@ -17,6 +17,8 @@ import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
 import { UserService } from "../user.service";
+
+import { Public } from "../../decorators/public.decorator";
 import { UserCreateInput } from "./UserCreateInput";
 import { UserWhereInput } from "./UserWhereInput";
 import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
@@ -32,6 +34,8 @@ import { TaskWhereUniqueInput } from "../../task/base/TaskWhereUniqueInput";
 
 export class UserControllerBase {
   constructor(protected readonly service: UserService) {}
+
+  @Public()
   @common.Post()
   @swagger.ApiCreatedResponse({ type: User })
   async create(@common.Body() data: UserCreateInput): Promise<User> {
@@ -49,6 +53,8 @@ export class UserControllerBase {
     });
   }
 
+
+  @Public()
   @common.Get()
   @swagger.ApiOkResponse({ type: [User] })
   @ApiNestedQuery(UserFindManyArgs)
@@ -68,6 +74,7 @@ export class UserControllerBase {
     });
   }
 
+  @Public()
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: User })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })

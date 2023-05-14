@@ -13,6 +13,9 @@ import * as graphql from "@nestjs/graphql";
 import * as apollo from "apollo-server-express";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
+
+import { Public } from "../../decorators/public.decorator";
+
 import { CreateProjectArgs } from "./CreateProjectArgs";
 import { UpdateProjectArgs } from "./UpdateProjectArgs";
 import { DeleteProjectArgs } from "./DeleteProjectArgs";
@@ -129,6 +132,7 @@ export class ProjectResolverBase {
     return results;
   }
 
+  @Public()
   @graphql.ResolveField(() => User, {
     nullable: true,
     name: "owner",
